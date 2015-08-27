@@ -17,7 +17,7 @@ def check_db(func):
     @wraps(func)
     def deco(*args):
         if args[0]._db is None:
-            print '[ERROR]Please make connection: `con = %db_connect xx` or `%use_credentials xx` first!'  # noqa
+            print('[ERROR]Please make connection: `con = %db_connect xx` or `%use_credentials xx` first!')  # noqa
             return
         return func(*args)
     return deco
@@ -68,10 +68,10 @@ class SQLDB(Magics):
     @check_db
     def save_credentials(self, parameter_s):
         if not parameter_s:
-            print '[ERROR]Please Specify credentials name'
+            print('[ERROR]Please Specify credentials name')
         else:
             self._db.save_credentials(profile=parameter_s)
-            print 'Save credentials [] successful!'.format(parameter_s[0])
+            print('Save credentials {} successful!'.format(parameter_s[0]))
 
     @line_magic('use_credentials')
     @check_db
@@ -103,7 +103,7 @@ class SQLDB(Magics):
     def find_column(self, parameter_s):
         p = parameter_s.split()
         if not parameter_s:
-            print '[ERROR]Please Specify column wildcard'
+            print('[ERROR]Please Specify column wildcard')
         else:
             return self._db.find_column(*p)
 
@@ -111,7 +111,7 @@ class SQLDB(Magics):
     @check_db
     def find_table(self, parameter_s):
         if not parameter_s:
-            print '[ERROR]Please Specify table wildcard'
+            print('[ERROR]Please Specify table wildcard')
         else:
             return self._db.find_table(parameter_s)
 
@@ -119,7 +119,7 @@ class SQLDB(Magics):
     @check_db
     def query(self, parameter_s):
         if not parameter_s:
-            print '[ERROR]Please Specify sql query'
+            print('[ERROR]Please Specify sql query')
         else:
             return self._db.query(parameter_s)
 
@@ -127,9 +127,9 @@ class SQLDB(Magics):
     @check_db
     def query_from_file(self, parameter_s):
         if not parameter_s:
-            print '[ERROR]Please Specify sql filepath'
+            print('[ERROR]Please Specify sql filepath')
         elif not os.path.exists(parameter_s):
-            print '[ERROR]This file {} not exists'.format(parameter_s)
+            print('[ERROR]This file {} not exists'.format(parameter_s))
         else:
             return self._db.query_from_file(parameter_s)
 
